@@ -21,6 +21,14 @@ replicas with automatic failover.
    docker build -t postgres-patroni .
    ```
 
+   If package downloads fail during the build, provide an alternative
+   Debian mirror:
+
+   ```bash
+   docker build --build-arg APT_MIRROR=your.mirror.example \
+       -t postgres-patroni .
+   ```
+
 2. Initialize a Docker Swarm if you have not done so already:
 
    ```bash
