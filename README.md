@@ -15,13 +15,19 @@ replicas with automatic failover.
 
 ## Usage
 
-1. Initialize a Docker Swarm if you have not done so already:
+1. Build the `postgres-patroni` image from the provided `Dockerfile`:
+
+   ```bash
+   docker build -t postgres-patroni .
+   ```
+
+2. Initialize a Docker Swarm if you have not done so already:
 
    ```bash
    docker swarm init
    ```
 
-2. Deploy the stack using the provided `docker-stack.yml`. The number of
+3. Deploy the stack using the provided `docker-stack.yml`. The number of
    nodes can be configured through the `PG_NODES` variable. By default it
    starts four nodes (one master and three replicas):
 
@@ -31,15 +37,15 @@ replicas with automatic failover.
 
    Change `PG_NODES` to scale the cluster with a single line.
 
-3. Verify that the services are running:
+4. Verify that the services are running:
 
    ```bash
    docker stack ps pg-cluster
    ```
 
-The stack uses the [Spilo](https://github.com/zalando/spilo) image which
-bundles PostgreSQL and Patroni. An `etcd` service is included to provide
-Patroni with a distributed configuration store.
+The stack uses a custom image built from the official `postgres` image
+with Patroni installed. An `etcd` service is included to provide Patroni
+with a distributed configuration store.
 
 To remove the stack:
 

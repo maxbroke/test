@@ -2,13 +2,10 @@ version: '3.8'
 
 services:
   pg_cluster:
-    image: ghcr.io/zalando/spilo-15:2.1-p6
+    image: postgres-patroni:latest
     environment:
-      CLUSTER_NAME: my-postgres
-      CLUSTER_SCOPE: my-postgres
-      SCOPE: my-postgres
-      PATRONI_POSTGRESQL_DATA_DIR: /home/postgres/pgdata/pgroot/data
-      PATRONI_KUBERNETES_USE_ENDPOINTS: 'false'
+      PATRONI_SCOPE: my-postgres
+      PATRONI_POSTGRESQL_DATA_DIR: /var/lib/postgresql/data
       PATRONI_LOG_LEVEL: INFO
       PATRONI_ETCD_HOSTS: etcd:2379
       PATRONI_REPLICATION_USERNAME: replicator
